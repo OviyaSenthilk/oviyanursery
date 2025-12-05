@@ -30,7 +30,7 @@ export default function Footer() {
         transition={{ duration: 1 }}
         className="font-semibold"
       >
-        © {new Date().getFullYear()} Sunshine Nursery School
+        © {new Date().getFullYear()} Oviya Nursery School
       </motion.p>
 
       <p className="text-sm opacity-80">A joyful place to learn and grow 🌱</p>

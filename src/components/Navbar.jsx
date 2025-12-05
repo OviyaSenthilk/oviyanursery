@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { motion } from "framer-motion";
 
 export default function Navbar() {
@@ -40,16 +39,22 @@ export default function Navbar() {
 
         {/* Menu */}
         <div className="flex space-x-6 font-bold text-pink-600">
-          {["Home", "About", "Admissions", "Gallery", "Contact"].map((item, i) => (
-            <motion.div
+          {[
+            { name: "Home", href: "#home" },
+            { name: "About", href: "#about" },
+            { name: "Admissions", href: "#admissions" },
+            { name: "Gallery", href: "#gallery" },
+            { name: "Contact", href: "#contact" },
+          ].map((item, i) => (
+            <motion.a
               key={i}
+              href={item.href}
               whileHover={{ scale: 1.2, rotate: 5 }}
               transition={{ type: "spring", stiffness: 200 }}
+              className="cursor-pointer"
             >
-              <Link href={item === "Home" ? "/" : `/${item.toLowerCase()}`}>
-                {item}
-              </Link>
-            </motion.div>
+              {item.name}
+            </motion.a>
           ))}
         </div>
       </div>

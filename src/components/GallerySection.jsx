@@ -2,9 +2,9 @@ import Image from "next/image";
 
 export default function Gallery() {
   const photos = [
-    "/images/class1.jpg",
-    "/images/playground.jpg",
-    "/images/activity.jpg",
+    "/images/1.jpeg",
+    "/images/2.jpeg",
+    "/images/3.jpeg",
   ];
 
   return (
