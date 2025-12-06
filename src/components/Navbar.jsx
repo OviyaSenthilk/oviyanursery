@@ -1,24 +1,42 @@
+// components/Navbar.js
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
+import { usePathname, useRouter } from "next/navigation";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const router = useRouter();
+  const pathname = usePathname();
 
   const menuItems = [
-    { name: "Home", href: "#home" },
-    { name: "About", href: "#about" },
-    { name: "Admissions", href: "#admissions" },
-    { name: "Gallery", href: "#gallery" },
-    { name: "Contact", href: "#contact" },
+    { name: "Home", id: "home" },
+    { name: "About", id: "about" },
+    { name: "Admissions", id: "admissions" },
+    { name: "Gallery", id: "gallery" },
+    { name: "Contact", id: "contact" },
   ];
 
-  return (
-    <nav className="relative bg-blue-200 py-5 shadow-xl overflow-hidden">
+  const scrollToSection = (id) => {
+    if (pathname !== "/") {
+      // Navigate to home first if not already there
+      router.push("/").then(() => {
+        requestAnimationFrame(() => {
+          document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+        });
+      });
+    } else {
+      // Directly scroll if already on home page
+      document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    }
+    setOpen(false); // close mobile menu
+  };
 
-      {/* Moving Clouds */}
+  return (
+    <nav className="fixed top-0 left-0 w-full z-50 bg-blue-200 py-5 shadow-xl overflow-hidden">
+      {/* Clouds */}
       <motion.div
         className="absolute top-2 left-[-200px] text-5xl hidden sm:block"
         animate={{ x: ["-200%", "200%"] }}
@@ -27,7 +45,7 @@ export default function Navbar() {
         ☁️ ☁️
       </motion.div>
 
-      {/* Moving Sun */}
+      {/* Sun */}
       <motion.div
         className="absolute top-2 right-4 text-6xl hidden sm:block"
         animate={{ rotate: 360 }}
@@ -38,7 +56,6 @@ export default function Navbar() {
 
       {/* Navbar Content */}
       <div className="relative max-w-6xl mx-auto flex items-center justify-between px-4">
-
         {/* Logo */}
         <motion.h1
           className="text-xl sm:text-3xl font-bold text-pink-600"
@@ -52,28 +69,25 @@ export default function Navbar() {
         {/* Desktop Menu */}
         <div className="hidden md:flex space-x-6 font-bold text-pink-600">
           {menuItems.map((item, i) => (
-            <motion.a
+            <motion.button
               key={i}
-              href={item.href}
-              whileHover={{ scale: 1.2, rotate: 5 }}
+              onClick={() => scrollToSection(item.id)}
+              whileHover={{ scale: 1.1, rotate: 3 }}
               transition={{ type: "spring", stiffness: 200 }}
-              className="cursor-pointer"
+              className="cursor-pointer bg-transparent"
             >
               {item.name}
-            </motion.a>
+            </motion.button>
           ))}
         </div>
 
-        {/* Mobile Burger Button */}
-        <button
-          className="md:hidden text-pink-600"
-          onClick={() => setOpen(!open)}
-        >
+        {/* Mobile Hamburger */}
+        <button className="md:hidden text-pink-600" onClick={() => setOpen(!open)}>
           {open ? <X size={28} /> : <Menu size={28} />}
         </button>
       </div>
 
-      {/* ✅ Mobile Dropdown Menu */}
+      {/* Mobile Dropdown Menu */}
       <AnimatePresence>
         {open && (
           <motion.div
@@ -83,19 +97,17 @@ export default function Navbar() {
             className="md:hidden bg-blue-100 px-6 py-4 space-y-4 font-bold text-pink-600 shadow-lg"
           >
             {menuItems.map((item, i) => (
-              <a
+              <button
                 key={i}
-                href={item.href}
-                onClick={() => setOpen(false)}
-                className="block text-lg"
+                onClick={() => scrollToSection(item.id)}
+                className="block text-lg w-full text-left"
               >
                 {item.name}
-              </a>
+              </button>
             ))}
           </motion.div>
         )}
       </AnimatePresence>
-
     </nav>
   );
 }
