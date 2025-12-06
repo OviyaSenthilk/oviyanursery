@@ -87,20 +87,27 @@ export default function Navbar() {
         </button>
       </div>
 
+     
       {/* Mobile Dropdown Menu */}
       <AnimatePresence>
         {open && (
           <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            className="md:hidden bg-blue-100 px-6 py-4 space-y-4 font-bold text-pink-600 shadow-lg"
+            initial={{ x: "100%" }}
+            animate={{ x: 0 }}
+            exit={{ x: "100%" }}
+            transition={{ type: "tween", duration: 0.3 }}
+            className="md:hidden fixed top-0 right-0 h-full w-64 bg-blue-100 p-6 shadow-xl z-50 flex flex-col"
           >
+            <div className="flex justify-end mb-6">
+              <button onClick={() => setOpen(false)} className="text-pink-600">
+                <X size={28} />
+              </button>
+            </div>
             {menuItems.map((item, i) => (
               <button
                 key={i}
                 onClick={() => scrollToSection(item.id)}
-                className="block text-lg w-full text-left"
+                className="text-pink-700 font-bold text-lg mb-4 text-left hover:scale-105 transition-transform"
               >
                 {item.name}
               </button>
@@ -108,6 +115,7 @@ export default function Navbar() {
           </motion.div>
         )}
       </AnimatePresence>
-    </nav>
-  );
-}
+
+          </nav>
+        );
+      }
