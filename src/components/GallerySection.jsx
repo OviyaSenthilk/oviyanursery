@@ -8,18 +8,28 @@ export default function Gallery() {
   ];
 
   return (
-    <section className="p-10">
-      <h2 className="text-3xl font-semibold mb-5">Our Gallery</h2>
+    <section
+      id="gallery"
+      className="px-4 sm:px-8 md:px-12 py-16 bg-white"
+    >
+      <h2 className="text-2xl sm:text-3xl font-semibold mb-8 text-center">
+        Our Gallery
+      </h2>
 
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {photos.map((img, i) => (
-          <Image 
+          <div
             key={i}
-            src={img}
-            width={400}
-            height={300}
-            alt="School Photo"
-          />
+            className="rounded-xl overflow-hidden shadow-lg bg-gray-100"
+          >
+            <Image
+              src={img}
+              alt="School Photo"
+              width={600}
+              height={400}
+              className="w-full h-auto object-cover hover:scale-105 transition-transform duration-300"
+            />
+          </div>
         ))}
       </div>
     </section>

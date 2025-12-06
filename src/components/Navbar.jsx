@@ -1,14 +1,26 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState } from "react";
+import { Menu, X } from "lucide-react";
 
 export default function Navbar() {
+  const [open, setOpen] = useState(false);
+
+  const menuItems = [
+    { name: "Home", href: "#home" },
+    { name: "About", href: "#about" },
+    { name: "Admissions", href: "#admissions" },
+    { name: "Gallery", href: "#gallery" },
+    { name: "Contact", href: "#contact" },
+  ];
+
   return (
     <nav className="relative bg-blue-200 py-5 shadow-xl overflow-hidden">
-      
+
       {/* Moving Clouds */}
       <motion.div
-        className="absolute top-2 left-[-200px] text-5xl"
+        className="absolute top-2 left-[-200px] text-5xl hidden sm:block"
         animate={{ x: ["-200%", "200%"] }}
         transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
       >
@@ -17,7 +29,7 @@ export default function Navbar() {
 
       {/* Moving Sun */}
       <motion.div
-        className="absolute top-2 right-4 text-6xl"
+        className="absolute top-2 right-4 text-6xl hidden sm:block"
         animate={{ rotate: 360 }}
         transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
       >
@@ -26,10 +38,10 @@ export default function Navbar() {
 
       {/* Navbar Content */}
       <div className="relative max-w-6xl mx-auto flex items-center justify-between px-4">
-        
+
         {/* Logo */}
         <motion.h1
-          className="text-3xl font-bold text-pink-600"
+          className="text-xl sm:text-3xl font-bold text-pink-600"
           initial={{ scale: 0.8 }}
           animate={{ scale: 1 }}
           transition={{ duration: 0.4 }}
@@ -37,15 +49,9 @@ export default function Navbar() {
           Oviya Nursery School
         </motion.h1>
 
-        {/* Menu */}
-        <div className="flex space-x-6 font-bold text-pink-600">
-          {[
-            { name: "Home", href: "#home" },
-            { name: "About", href: "#about" },
-            { name: "Admissions", href: "#admissions" },
-            { name: "Gallery", href: "#gallery" },
-            { name: "Contact", href: "#contact" },
-          ].map((item, i) => (
+        {/* Desktop Menu */}
+        <div className="hidden md:flex space-x-6 font-bold text-pink-600">
+          {menuItems.map((item, i) => (
             <motion.a
               key={i}
               href={item.href}
@@ -57,7 +63,38 @@ export default function Navbar() {
             </motion.a>
           ))}
         </div>
+
+        {/* Mobile Burger Button */}
+        <button
+          className="md:hidden text-pink-600"
+          onClick={() => setOpen(!open)}
+        >
+          {open ? <X size={28} /> : <Menu size={28} />}
+        </button>
       </div>
+
+      {/* ✅ Mobile Dropdown Menu */}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            className="md:hidden bg-blue-100 px-6 py-4 space-y-4 font-bold text-pink-600 shadow-lg"
+          >
+            {menuItems.map((item, i) => (
+              <a
+                key={i}
+                href={item.href}
+                onClick={() => setOpen(false)}
+                className="block text-lg"
+              >
+                {item.name}
+              </a>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
 
     </nav>
   );
