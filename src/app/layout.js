@@ -8,21 +8,21 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className="flex flex-col min-h-screen">
+    <html lang="en" className="overflow-x-hidden">
+      <body className="flex flex-col min-h-screen overflow-x-hidden">
 
         {/* Navbar stays at top */}
-        <header className="fixed top-0 left-0 w-full z-50 bg-white shadow">
+        <header className="fixed top-0 left-0 w-full max-w-full z-50 bg-white shadow overflow-x-hidden">
           <Navbar />
         </header>
 
         {/* Push content below navbar */}
-        <main className="flex-grow mt-[70px]">
+        <main className="flex-grow mt-[70px] w-full max-w-full overflow-x-hidden">
           {children}
         </main>
 
         {/* Footer always stays at bottom */}
-        <footer>
+        <footer className="w-full max-w-full overflow-x-hidden">
           <Footer />
         </footer>
 

@@ -20,17 +20,27 @@ export default function Contact() {
     e.preventDefault();
     setStatus("Sending...");
 
-    const res = await fetch("/api/sendMail", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(form),
-    });
+    try {
+      const res = await fetch("/api/sendMail", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
 
-    if (res.ok) {
-      setStatus("Mail Sent Successfully ✔");
-      setForm({ name: "", email: "", phone: "", subject: "", message: "" });
-    } else {
-      setStatus("Failed to Send ❌");
+      if (res.ok) {
+        setStatus("Mail Sent Successfully ✔");
+        setForm({
+          name: "",
+          email: "",
+          phone: "",
+          subject: "",
+          message: "",
+        });
+      } else {
+        setStatus("Failed to Send ❌");
+      }
+    } catch (error) {
+      setStatus("Network Error ❌");
     }
   };
 
@@ -44,7 +54,7 @@ export default function Contact() {
           <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold">
             Get in Touch
           </h1>
-          <p className="mt-2 opacity-90 text-sm sm:text-base">
+          <p className="mt-2 text-sm sm:text-base">
             We'd love to hear from you! Contact us anytime.
           </p>
         </div>
@@ -54,7 +64,7 @@ export default function Contact() {
           {/* LEFT FORM */}
           <form
             onSubmit={handleSubmit}
-            className="md:col-span-2 bg-white rounded-xl p-6 sm:p-8 shadow-xl"
+            className="md:col-span-2 bg-white rounded-xl p-6 sm:p-8 shadow-xl text-gray-900"
           >
             <h2 className="text-xl sm:text-2xl font-semibold mb-5">
               Send us a Message
@@ -68,7 +78,8 @@ export default function Contact() {
                 value={form.name}
                 onChange={handleChange}
                 required
-                className="border p-3 rounded-md w-full"
+                className="border border-gray-300 p-3 rounded-md w-full text-gray-900 
+                placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500"
               />
 
               <input
@@ -78,7 +89,8 @@ export default function Contact() {
                 value={form.email}
                 onChange={handleChange}
                 required
-                className="border p-3 rounded-md w-full"
+                className="border border-gray-300 p-3 rounded-md w-full text-gray-900 
+                placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500"
               />
 
               <input
@@ -87,7 +99,8 @@ export default function Contact() {
                 placeholder="Phone Number"
                 value={form.phone}
                 onChange={handleChange}
-                className="border p-3 rounded-md w-full"
+                className="border border-gray-300 p-3 rounded-md w-full text-gray-900 
+                placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500"
               />
 
               <input
@@ -97,7 +110,8 @@ export default function Contact() {
                 value={form.subject}
                 onChange={handleChange}
                 required
-                className="border p-3 rounded-md w-full"
+                className="border border-gray-300 p-3 rounded-md w-full text-gray-900 
+                placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500"
               />
             </div>
 
@@ -107,7 +121,9 @@ export default function Contact() {
               value={form.message}
               onChange={handleChange}
               required
-              className="border p-3 rounded-md w-full h-32 mt-4"
+              className="border border-gray-300 p-3 rounded-md w-full h-32 mt-4 
+              text-gray-900 placeholder-gray-500 focus:outline-none 
+              focus:ring-2 focus:ring-purple-500"
             />
 
             <button
@@ -119,17 +135,27 @@ export default function Contact() {
             </button>
 
             {status && (
-              <p className="mt-3 text-purple-700 text-sm sm:text-base">
+              <p
+                className={`mt-3 text-sm sm:text-base font-semibold ${
+                  status.includes("Successfully")
+                    ? "text-green-600"
+                    : status.includes("Sending")
+                    ? "text-purple-600"
+                    : "text-red-600"
+                }`}
+              >
                 {status}
               </p>
             )}
           </form>
 
           {/* RIGHT INFO */}
-          <div className="space-y-6">
+          <div className="space-y-6 text-gray-900">
 
             <div className="bg-white p-5 sm:p-6 shadow-xl rounded-xl">
-              <h3 className="text-base sm:text-lg font-semibold mb-2">Visit Us</h3>
+              <h3 className="text-base sm:text-lg font-semibold mb-2">
+                Visit Us
+              </h3>
               <p className="text-sm sm:text-base">
                 Oviya Nursery School <br />
                 18/70, TSK Nagar, Irugur, <br />
@@ -138,9 +164,15 @@ export default function Contact() {
             </div>
 
             <div className="bg-white p-5 sm:p-6 shadow-xl rounded-xl">
-              <h3 className="text-base sm:text-lg font-semibold mb-2">Call Us</h3>
-              <p className="text-sm sm:text-base">📞 +91 7811806088</p>
-              <p className="text-sm sm:text-base">📞 +91 9363270507</p>
+              <h3 className="text-base sm:text-lg font-semibold mb-2">
+                Call Us
+              </h3>
+              <p className="text-sm sm:text-base font-medium">
+                📞 +91 7811806088
+              </p>
+              <p className="text-sm sm:text-base font-medium">
+                📞 +91 9363270507
+              </p>
             </div>
 
             {/* MAP */}

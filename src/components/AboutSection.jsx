@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 export default function About() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-100 to-pink-100 
+    <div className="min-h-screen w-full bg-gradient-to-br from-purple-100 to-pink-100 
     px-4 sm:px-8 md:px-10 pt-24 pb-12">
       <div className="max-w-6xl mx-auto">
 
@@ -14,10 +14,12 @@ export default function About() {
           className="bg-gradient-to-r from-purple-600 to-orange-400 text-white 
           p-6 sm:p-10 rounded-2xl shadow-xl text-center mb-10 sm:mb-12"
         >
-          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white">
             About Oviya Nursery School
           </h1>
-          <p className="mt-2 text-sm sm:text-base md:text-lg opacity-90">
+
+          {/* 🔥 REMOVED opacity-90 */}
+          <p className="mt-2 text-sm sm:text-base md:text-lg font-medium text-white">
             18+ years of excellence in shaping confident young learners.
           </p>
         </motion.div>
@@ -27,7 +29,7 @@ export default function About() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           className="bg-white p-6 sm:p-8 rounded-2xl shadow-xl mb-10 
-          leading-relaxed text-sm sm:text-base md:text-lg"
+          leading-relaxed text-sm sm:text-base md:text-lg text-gray-800 font-medium"
         >
           <p>
             Oviya Nursery School has been a trusted foundation for early childhood
@@ -52,9 +54,9 @@ export default function About() {
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
-            className="bg-white p-6 sm:p-8 rounded-2xl shadow-xl"
+            className="bg-white p-6 sm:p-8 rounded-2xl shadow-xl text-gray-800 font-medium"
           >
-            <h2 className="text-xl sm:text-2xl font-semibold mb-3 flex items-center gap-2">
+            <h2 className="text-xl sm:text-2xl font-semibold mb-3 flex items-center gap-2 text-gray-900">
               🌟 Our Vision
             </h2>
             <p className="leading-relaxed text-sm sm:text-base">
@@ -70,9 +72,9 @@ export default function About() {
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
-            className="bg-white p-6 sm:p-8 rounded-2xl shadow-xl"
+            className="bg-white p-6 sm:p-8 rounded-2xl shadow-xl text-gray-800 font-medium"
           >
-            <h2 className="text-xl sm:text-2xl font-semibold mb-3 flex items-center gap-2">
+            <h2 className="text-xl sm:text-2xl font-semibold mb-3 flex items-center gap-2 text-gray-900">
               🎯 Our Mission
             </h2>
             <p className="leading-relaxed text-sm sm:text-base">
@@ -85,14 +87,14 @@ export default function About() {
           </motion.div>
         </div>
 
-        {/* ACHIEVEMENTS SECTION */}
+        {/* ACHIEVEMENTS */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.7 }}
-          className="bg-white p-6 sm:p-8 rounded-2xl shadow-xl mt-10"
+          className="bg-white p-6 sm:p-8 rounded-2xl shadow-xl mt-10 text-gray-800 font-medium"
         >
-          <h2 className="text-xl sm:text-2xl font-semibold mb-3">
+          <h2 className="text-xl sm:text-2xl font-semibold mb-3 text-gray-900">
             🏆 Our Legacy of Success
           </h2>
           <p className="leading-relaxed text-sm sm:text-base md:text-lg">

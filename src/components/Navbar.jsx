@@ -1,4 +1,3 @@
-// components/Navbar.js
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
@@ -36,14 +35,14 @@ export default function Navbar() {
 
   return (
     <nav className="fixed top-0 left-0 w-full z-50 bg-blue-200 py-5 shadow-xl overflow-hidden">
-      {/* Clouds */}
-      <motion.div
-        className="absolute top-2 left-[-200px] text-5xl hidden sm:block"
-        animate={{ x: ["-200%", "200%"] }}
-        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-      >
-        ☁️ ☁️
-      </motion.div>
+     <motion.div
+  className="absolute top-2 left-0 w-full overflow-hidden text-5xl hidden sm:block pointer-events-none"
+  animate={{ x: ["-100%", "100%"] }}
+  transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+>
+  <div className="inline-block whitespace-nowrap">☁️ ☁️ ☁️</div>
+     </motion.div>
+
 
       {/* Sun */}
       <motion.div

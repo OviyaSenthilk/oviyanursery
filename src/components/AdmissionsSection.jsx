@@ -11,15 +11,15 @@ export default function Admissions() {
 
         {/* HEADER BANNER */}
         <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ y: -20 }}
+          animate={{ y: 0 }}
           className="bg-gradient-to-r from-purple-600 to-orange-400 text-white 
           p-6 sm:p-10 rounded-2xl shadow-lg mb-10 text-center"
         >
           <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold">
             Admissions Open
           </h1>
-          <p className="mt-2 opacity-90 text-sm sm:text-base">
+          <p className="mt-2 text-sm sm:text-base">
             Welcome to Oviya Nursery School – where learning is joyful!
           </p>
         </motion.div>
@@ -27,105 +27,56 @@ export default function Admissions() {
         {/* GRID SECTIONS */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
 
-          {/* PRE-KG */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="bg-white rounded-xl p-6 shadow-xl text-center"
-          >
-            <div className="relative w-full h-48 sm:h-52 rounded-lg overflow-hidden mb-4">
-              <Image
-                src="/images/prekg.jpeg"
-                alt="Pre-KG"
-                fill
-                className="object-cover"
-              />
-            </div>
+          {[
+            { title: "Pre-KG", img: "/images/prekg.jpeg", desc: "A playful and safe space where children begin their learning journey." },
+            { title: "LKG", img: "/images/lkg.jpeg", desc: "Building early academic and social skills in a supportive environment." },
+            { title: "UKG", img: "/images/ukg.jpeg", desc: "Preparing confident young learners for primary schooling." },
+          ].map((item, index) => (
+            <motion.div
+              key={item.title}
+              initial={{ y: 40 }}
+              whileInView={{ y: 0 }}
+              transition={{ duration: 0.5 + index * 0.2 }}
+              className="bg-white rounded-xl p-6 shadow-xl text-center text-gray-800"
+            >
+              <div className="relative w-full h-48 sm:h-52 rounded-lg overflow-hidden mb-4">
+                <Image
+                  src={item.img}
+                  alt={item.title}
+                  fill
+                  className="object-cover"
+                />
+              </div>
 
-            <h2 className="text-xl sm:text-2xl font-bold mb-2">Pre-KG</h2>
-            <p className="text-gray-600 mb-4 text-sm sm:text-base">
-              A playful and safe space where children begin their learning journey.
-            </p>
+              <h2 className="text-xl sm:text-2xl font-bold mb-2">
+                {item.title}
+              </h2>
 
-            <Link href="/#contact">
-              <button className="bg-purple-600 hover:bg-purple-700 text-white 
-              px-5 py-2 rounded-lg shadow-md">
-                Apply Now
-              </button>
-            </Link>
-          </motion.div>
+              <p className="mb-4 text-sm sm:text-base text-gray-800">
+                {item.desc}
+              </p>
 
-          {/* LKG */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-            className="bg-white rounded-xl p-6 shadow-xl text-center"
-          >
-            <div className="relative w-full h-48 sm:h-52 rounded-lg overflow-hidden mb-4">
-              <Image
-                src="/images/lkg.jpeg"
-                alt="LKG"
-                fill
-                className="object-cover"
-              />
-            </div>
-
-            <h2 className="text-xl sm:text-2xl font-bold mb-2">LKG</h2>
-            <p className="text-gray-600 mb-4 text-sm sm:text-base">
-              Building early academic and social skills in a supportive environment.
-            </p>
-
-            <Link href="/#contact">
-              <button className="bg-purple-600 hover:bg-purple-700 text-white 
-              px-5 py-2 rounded-lg shadow-md">
-                Apply Now
-              </button>
-            </Link>
-          </motion.div>
-
-          {/* UKG */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9 }}
-            className="bg-white rounded-xl p-6 shadow-xl text-center"
-          >
-            <div className="relative w-full h-48 sm:h-52 rounded-lg overflow-hidden mb-4">
-              <Image
-                src="/images/ukg.jpeg"
-                alt="UKG"
-                fill
-                className="object-cover"
-              />
-            </div>
-
-            <h2 className="text-xl sm:text-2xl font-bold mb-2">UKG</h2>
-            <p className="text-gray-600 mb-4 text-sm sm:text-base">
-              Preparing confident young learners for primary schooling.
-            </p>
-
-            <Link href="/#contact">
-              <button className="bg-purple-600 hover:bg-purple-700 text-white 
-              px-5 py-2 rounded-lg shadow-md">
-                Apply Now
-              </button>
-            </Link>
-          </motion.div>
-
+              <Link href="/#contact">
+                <button className="bg-purple-600 hover:bg-purple-700 text-white 
+                px-5 py-2 rounded-lg shadow-md">
+                  Apply Now
+                </button>
+              </Link>
+            </motion.div>
+          ))}
         </div>
 
-        {/* EXTRA DESCRIPTIVE SECTION */}
+        {/* EXTRA SECTION */}
         <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          className="bg-white rounded-xl p-6 sm:p-8 mt-10 shadow-xl text-center"
+          initial={{ y: 30 }}
+          whileInView={{ y: 0 }}
+          className="bg-white rounded-xl p-6 sm:p-8 mt-10 shadow-xl text-center text-gray-800"
         >
           <h2 className="text-2xl sm:text-3xl font-bold mb-4">
             Why Choose Oviya Nursery?
           </h2>
-          <p className="text-gray-600 text-sm sm:text-lg leading-relaxed max-w-3xl mx-auto">
+
+          <p className="text-sm sm:text-lg leading-relaxed max-w-3xl mx-auto">
             We focus on ensuring every child is happy, confident, and curious.
             With creative learning, caring teachers, and a safe environment,
             we bring your child forward into society with strong values and skills.

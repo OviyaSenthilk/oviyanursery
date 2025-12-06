@@ -10,7 +10,7 @@ export default function Gallery() {
   return (
     <section
       id="gallery"
-      className="px-4 sm:px-8 md:px-12 py-16 bg-white"
+      className="px-4 sm:px-8 md:px-12 py-16 bg-white text-gray-900"
     >
       <h2 className="text-2xl sm:text-3xl font-semibold mb-8 text-center">
         Our Gallery
@@ -27,7 +27,8 @@ export default function Gallery() {
               alt="School Photo"
               width={600}
               height={400}
-              className="w-full h-auto object-cover hover:scale-105 transition-transform duration-300"
+              className="w-full h-auto object-cover transition-transform duration-300 hover:scale-105 active:scale-100"
+              priority={i === 0}
             />
           </div>
         ))}
